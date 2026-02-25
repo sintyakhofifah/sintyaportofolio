@@ -71,13 +71,21 @@ form.addEventListener("submit", function(e) {
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
     })
-    .then(r => r.json())
-    .then(() => {
+    .then(r => {
+        if (r.ok) return r.json();
+        // If not JSON, try text response
+        return r.text().then(text => ({ text }));
+    })
+    .then(data => {
         statusText.textContent = "✓ Message Sent Successfully";
         statusText.classList.add('success');
         form.reset();
     })
-    .catch(() => { statusText.textContent = "Oops! Something went wrong."; });
+    .catch(() => { 
+        // Fallback: regular form submission
+        statusText.textContent = "Sending via email...";
+        form.submit();
+    });
 });
 
 
