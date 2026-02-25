@@ -751,9 +751,9 @@ section { padding: 90px 8%; }
     box-shadow:0 4px 15px rgba(0,0,0,0.15);
 }
 .form-message span.success {
-    background: rgba(143,255,204,0.15);
-    border-color: #8fffcc;
-    color: #8fffcc;
+    background: rgba(255,255,255,0.15);
+    border-color: #B65656;
+    color: #f8b0b0;
 }
 
 
