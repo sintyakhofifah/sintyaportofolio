@@ -1,10 +1,6 @@
-/* ===================================================
-   PORTFOLIO SINTYA KHOFIFAH — script.js
-=================================================== */
-
-/* ===== HAMBURGER MENU ===== */
+/* HAMBURGER MENU */
 const hamburger = document.getElementById('hamburger');
-const navMenu   = document.getElementById('nav-menu');
+const navMenu = document.getElementById('nav-menu');
 
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
@@ -18,7 +14,7 @@ navMenu.querySelectorAll('a').forEach(link => {
     });
 });
 
-/* ===== ACTIVE NAV ON SCROLL ===== */
+/* ACTIVE NAV ON SCROLL */
 const sections = document.querySelectorAll('section[id]');
 const navItems = document.querySelectorAll('.navbar ul li');
 
@@ -36,14 +32,14 @@ function updateActiveNav() {
 window.addEventListener('scroll', updateActiveNav);
 updateActiveNav();
 
-/* ===== SCROLL REVEAL ===== */
+/* SCROLL REVEAL */
 const revealEls = document.querySelectorAll('.reveal');
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
 revealEls.forEach(el => revealObserver.observe(el));
 
-/* ===== SKILL BAR ANIMATION ===== */
+/* SKILL BAR ANIMATION */
 const skillFills = document.querySelectorAll('.skill-fill');
 const skillObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -57,41 +53,50 @@ const skillObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 skillFills.forEach(fill => skillObserver.observe(fill));
 
-/* ===== CONTACT FORM ===== */
-const form       = document.getElementById("contact-form");
+/* CONTACT FORM */
+const form = document.getElementById("contact-form");
 const statusText = document.getElementById("form-status");
 
-form.addEventListener("submit", function(e) {
-    e.preventDefault();
-    statusText.textContent = "Sending...";
-    statusText.classList.remove('success');
+form.addEventListener("submit", function (e) {
+    e.preventDefault(); // Menghentikan reload halaman
 
+    const emailInput = form.querySelector('input[type="email"]');
+    const gmailRegex = /^[a-z0-9._%+-]+@gmail\.com$/i; 
+
+    if (!gmailRegex.test(emailInput.value)) {
+        emailInput.setCustomValidity("masukkan email yang bener woi! (ex: nama@gmail.com)");
+        form.reportValidity();
+        return;
+    } else {
+        emailInput.setCustomValidity("");
+    }
+
+    statusText.textContent = "Sending...";
+    statusText.style.display = "block";
+
+    // 2. Kirim Data
     fetch(form.action, {
         method: "POST",
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
     })
-    .then(r => {
-        if (r.ok) return r.json();
-        // If not JSON, try text response
-        return r.text().then(text => ({ text }));
-    })
-    .then(data => {
-        statusText.textContent = "✓ Message Sent Successfully";
-        statusText.classList.add('success');
-        form.reset();
-    })
-    .catch(() => { 
-        // Fallback: regular form submission
-        statusText.textContent = "Sending via email...";
-        form.submit();
-    });
+        .then(response => {
+            if (response.ok) {
+                statusText.textContent = "✓ Message Sent Successfully";
+                form.reset(); // Kosongkan form setelah sukses
+            } else {
+                return response.json().then(data => {
+                    throw new Error(data.error || "Gagal mengirim");
+                });
+            }
+        })
+        .catch(error => {
+            statusText.textContent = "Gagal: " + error.message;
+        });
 });
 
 
-/* =====================================================
-   CINEMATIC LIGHTBOX
-===================================================== */
+/* CINEMATIC LIGHTBOX */
 
 const lbHTML = `
 <div class="lb-curtain"></div>
@@ -116,15 +121,15 @@ lb.id = 'lightbox';
 lb.innerHTML = lbHTML;
 document.body.appendChild(lb);
 
-const lbStage   = lb.querySelector('.lb-stage');
-const lbTag     = lb.querySelector('.lb-tag');
-const lbTitle   = lb.querySelector('.lb-title');
-const lbDesc    = lb.querySelector('.lb-desc');
+const lbStage = lb.querySelector('.lb-stage');
+const lbTag = lb.querySelector('.lb-tag');
+const lbTitle = lb.querySelector('.lb-title');
+const lbDesc = lb.querySelector('.lb-desc');
 const lbCounter = lb.querySelector('.lb-counter');
-const lbClose   = lb.querySelector('.lb-close');
-const lbPrev    = lb.querySelector('.lb-prev');
-const lbNext    = lb.querySelector('.lb-next');
-const lbDots    = lb.querySelector('.lb-dots');
+const lbClose = lb.querySelector('.lb-close');
+const lbPrev = lb.querySelector('.lb-prev');
+const lbNext = lb.querySelector('.lb-next');
+const lbDots = lb.querySelector('.lb-dots');
 const lbCurtain = lb.querySelector('.lb-curtain');
 
 let cards = [];
@@ -136,14 +141,14 @@ function collectCards() {
     document.querySelectorAll('.work-card').forEach(card => {
         const imgEl = card.querySelector('.work-card-img img');
         const vidEl = card.querySelector('.work-card-img video');
-        const bgEl  = card.querySelector('.work-card-img');
+        const bgEl = card.querySelector('.work-card-img');
         cards.push({
-            src     : card.dataset.media || (imgEl ? imgEl.src : '') || '',
-            type    : card.dataset.mediaType || (vidEl ? 'video' : 'image'),
-            tag     : card.querySelector('.tag')?.textContent.trim() || '',
-            title   : card.querySelector('h3')?.textContent.trim() || '',
-            desc    : card.querySelector('p')?.textContent.trim() || '',
-            bgStyle : bgEl?.getAttribute('style') || '',
+            src: card.dataset.media || (imgEl ? imgEl.src : '') || '',
+            type: card.dataset.mediaType || (vidEl ? 'video' : 'image'),
+            tag: card.querySelector('.tag')?.textContent.trim() || '',
+            title: card.querySelector('h3')?.textContent.trim() || '',
+            desc: card.querySelector('p')?.textContent.trim() || '',
+            bgStyle: bgEl?.getAttribute('style') || '',
         });
     });
 }
@@ -196,10 +201,10 @@ function createSlide(idx) {
 
 function updateInfo(idx) {
     const d = cards[idx];
-    lbTag.textContent     = d.tag;
-    lbTitle.textContent   = d.title;
-    lbDesc.textContent    = d.desc;
-    lbCounter.textContent = String(idx + 1).padStart(2,'0') + ' / ' + String(cards.length).padStart(2,'0');
+    lbTag.textContent = d.tag;
+    lbTitle.textContent = d.title;
+    lbDesc.textContent = d.desc;
+    lbCounter.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(cards.length).padStart(2, '0');
     lbPrev.disabled = idx === 0;
     lbNext.disabled = idx === cards.length - 1;
 }
@@ -209,10 +214,10 @@ function goTo(nextIdx, direction) {
     if (nextIdx < 0 || nextIdx >= cards.length) return;
     isAnimating = true;
 
-    const oldSlide  = lbStage.querySelector('.lb-slide.active');
-    const newSlide  = createSlide(nextIdx);
-    const enterCls  = direction === 'right' ? 'enter-right' : 'enter-left';
-    const exitCls   = direction === 'right' ? 'exit-left'   : 'exit-right';
+    const oldSlide = lbStage.querySelector('.lb-slide.active');
+    const newSlide = createSlide(nextIdx);
+    const enterCls = direction === 'right' ? 'enter-right' : 'enter-left';
+    const exitCls = direction === 'right' ? 'exit-left' : 'exit-right';
 
     lbStage.appendChild(newSlide);
 
@@ -234,7 +239,7 @@ function goTo(nextIdx, direction) {
     updateDots();
 
     const vid = newSlide.querySelector('video');
-    if (vid) vid.play().catch(() => {});
+    if (vid) vid.play().catch(() => { });
 }
 
 function openLightbox(idx) {
@@ -248,7 +253,7 @@ function openLightbox(idx) {
     lbStage.appendChild(slide);
 
     const vid = slide.querySelector('video');
-    if (vid) vid.play().catch(() => {});
+    if (vid) vid.play().catch(() => { });
 
     updateInfo(idx);
     buildDots();
@@ -274,8 +279,8 @@ lbNext.addEventListener('click', () => { if (current < cards.length - 1) goTo(cu
 
 document.addEventListener('keydown', e => {
     if (!lb.classList.contains('active')) return;
-    if (e.key === 'Escape')     closeLightbox();
-    if (e.key === 'ArrowLeft')  lbPrev.click();
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lbPrev.click();
     if (e.key === 'ArrowRight') lbNext.click();
 });
 
@@ -313,6 +318,6 @@ document.addEventListener('mousemove', e => {
     cancelAnimationFrame(cursorRaf);
     cursorRaf = requestAnimationFrame(() => {
         cursor.style.left = e.clientX + 'px';
-        cursor.style.top  = e.clientY + 'px';
+        cursor.style.top = e.clientY + 'px';
     });
 });

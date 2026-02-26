@@ -1,8 +1,3 @@
-/* ===================================================
-   PORTFOLIO SINTYA KHOFIFAH — style.css
-=================================================== */
-
-/* ===== VARIABLES ===== */
 :root {
     --hero-img-size: 32vw;
     --hero-img-top: 30px;
@@ -17,7 +12,7 @@
     --card-bg: #ffcccc;
 }
 
-/* ===== RESET ===== */
+/* RESET */
 *, *::before, *::after {
     margin: 0; padding: 0;
     box-sizing: border-box;
@@ -29,7 +24,7 @@ html { scroll-behavior: smooth; }
 body { background-color: var(--bg); overflow-x: hidden; }
 a { color: var(--primary); text-decoration: none; }
 
-/* ===== NAVBAR ===== */
+/* NAVBAR*/
 .navbar {
     position: fixed;
     left: 0; top: 0;
@@ -104,7 +99,7 @@ a { color: var(--primary); text-decoration: none; }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-/* ===== HOME ===== */
+/*  HOME */
 .home {
     display: flex;
     align-items: center;
@@ -167,7 +162,7 @@ a { color: var(--primary); text-decoration: none; }
 
 .btn:active { transform: scale(0.97); }
 
-/* ===== HERO IMAGE + FLOATING SOCIALS ===== */
+/* HERO IMAGE + FLOATING SOCIALS */
 .home-img {
     position: relative;
     display: flex;
@@ -256,7 +251,7 @@ a { color: var(--primary); text-decoration: none; }
     object-fit: cover;
 }
 
-/* ===== SECTION COMMONS ===== */
+/* SECTION COMMONS */
 section { padding: 90px 8%; }
 
 .section-title {
@@ -289,7 +284,7 @@ section { padding: 90px 8%; }
     margin: 10px auto 0;
 }
 
-/* ===== ABOUT ===== */
+/* ABOUT */
 .about-section {
     display: flex;
     justify-content: center;
@@ -348,7 +343,7 @@ section { padding: 90px 8%; }
     color: #6b3535;
 }
 
-/* ===== EXPERIENCE ===== */
+/* EXPERIENCE */
 #experience { background: var(--nav-bg); }
 
 .timeline {
@@ -458,7 +453,7 @@ section { padding: 90px 8%; }
     line-height: 1.75;
 }
 
-/* ===== MY WORK ===== */
+/* MY WORK */
 #work { background: var(--bg); }
 
 .work-grid {
@@ -537,7 +532,7 @@ section { padding: 90px 8%; }
     line-height: 1.7;
 }
 
-/* ===== SKILLS ===== */
+/* SKILLS */
 #skill { background: var(--nav-bg); }
 
 .skills-wrapper {
@@ -625,7 +620,7 @@ section { padding: 90px 8%; }
 
 .tool-chip i { font-size: 16px; }
 
-/* ===== CONTACT ===== */
+/* CONTACT */
 #contact { background: var(--primary); }
 
 #contact .section-title span { color: #ffaaaa; }
@@ -730,7 +725,7 @@ section { padding: 90px 8%; }
 
 .contact-form .btn-send:active { transform: scale(0.97); }
 
-/* ===== Message ===== */
+/* Message */
 .form-message{
     text-align:left;
     margin-bottom:2px;
@@ -757,7 +752,7 @@ section { padding: 90px 8%; }
 }
 
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer {
     background: #3d0a0a;
     color: rgba(255,255,255,0.7);
@@ -844,7 +839,7 @@ footer {
 
 .footer-bottom span { color: rgba(255,100,100,0.8); }
 
-/* ===== ANIMATIONS ===== */
+/* ANIMATIONS */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -861,7 +856,7 @@ footer {
     transform: translateY(0);
 }
 
-/* ===== RESPONSIVE TABLET (≤900px) ===== */
+/* RESPONSIVE TABLET (≤900px) */
 @media (max-width: 900px) {
     :root {
         --hero-img-size: 50vw;
@@ -922,7 +917,7 @@ footer {
     }
 }
 
-/* ===== RESPONSIVE MOBILE (≤600px) ===== */
+/* RESPONSIVE MOBILE (≤600px) */
 @media (max-width: 600px) {
     :root {
         --hero-img-size: 68vw;
@@ -969,11 +964,9 @@ footer {
 }
 
 
-/* ===================================================
-   CINEMATIC LIGHTBOX — tambahkan di akhir style.css
-=================================================== */
+/* CINEMATIC LIGHTBOX */
 
-/* ---- Root lightbox overlay ---- */
+/* Root lightbox overlay */
 #lightbox {
     position: fixed;
     inset: 0;
@@ -986,7 +979,7 @@ footer {
     pointer-events: all;
 }
 
-/* ---- Backdrop: dark curtain yang turun ---- */
+/* Backdrop: dark curtain yang turun */
 .lb-curtain {
     position: absolute;
     inset: 0;
@@ -999,7 +992,7 @@ footer {
     opacity: 0.96;
 }
 
-/* ---- Stage: full-screen media container ---- */
+/* Stage: full-screen media container */
 .lb-stage {
     position: absolute;
     inset: 0;
@@ -1009,7 +1002,7 @@ footer {
     overflow: hidden;
 }
 
-/* ---- Slide-ul media ---- */
+/* Slide-ul media */
 .lb-slide {
     position: absolute;
     inset: 0;
@@ -1066,7 +1059,7 @@ footer {
     to   { opacity: 1; transform: scale(1);    filter: blur(0); }
 }
 
-/* ---- Gambar / Video dalam slide ---- */
+/* Gambar / Video dalam slide */
 .lb-slide img {
     max-width: 90vw;
     max-height: 82vh;
@@ -1111,7 +1104,7 @@ footer {
     letter-spacing: 2px;
 }
 
-/* ---- Info overlay bawah: fade up ---- */
+/* Info overlay bawah: fade up */
 .lb-overlay-info {
     position: absolute;
     bottom: 0; left: 0; right: 0;
@@ -1161,7 +1154,7 @@ footer {
     max-width: 520px;
 }
 
-/* ---- Counter pill ---- */
+/* Counter pill */
 .lb-counter {
     font-size: 12px;
     font-weight: 700;
@@ -1172,7 +1165,7 @@ footer {
     padding-bottom: 4px;
 }
 
-/* ---- Tombol tutup (pojok kanan atas) ---- */
+/* Tombol tutup (pojok kanan atas) */
 .lb-close {
     position: absolute;
     top: 24px; right: 28px;
@@ -1207,7 +1200,7 @@ footer {
     transform: rotate(90deg) scale(1.1) !important;
 }
 
-/* ---- Tombol panah kiri/kanan ---- */
+/* Tombol panah kiri/kanan */
 .lb-prev,
 .lb-next {
     position: absolute;
@@ -1259,7 +1252,7 @@ footer {
     pointer-events: none;
 }
 
-/* ---- Dot indicators ---- */
+/* Dot indicators */
 .lb-dots {
     position: absolute;
     top: 24px; left: 50%;
@@ -1286,7 +1279,7 @@ footer {
     transform: scale(1.5);
 }
 
-/* ---- Touch swipe hint garis ---- */
+/* Touch swipe hint garis */
 .lb-swipe-hint {
     position: absolute;
     bottom: 48%;
@@ -1308,7 +1301,7 @@ footer {
     100% { opacity: 0; }
 }
 
-/* ---- Hover cursor kustom di work card ---- */
+/* Hover cursor kustom di work card */
 /* .work-card {
     cursor: none !important;
 }
@@ -1340,7 +1333,7 @@ footer {
     transform: translate(-50%, -50%) scale(1);
 } */
 
-/* ---- Mobile: sembunyikan cursor kustom, tunjukkan swipe area ---- */
+/* Mobile: sembunyikan cursor kustom, tunjukkan swipe area */
 @media (hover: none), (max-width: 600px) {
     .lb-cursor { display: none; }
     .work-card { cursor: pointer !important; }
